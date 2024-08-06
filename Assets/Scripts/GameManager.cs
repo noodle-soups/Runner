@@ -4,5 +4,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public int _playerScore = 0;
+    [SerializeField] private int _playerScore = 0;
+
+    public void AddScore(int scoreToAdd)
+    {
+        _playerScore += scoreToAdd;
+        Debug.Log("SCORE!!! Current score: " + _playerScore.ToString());
+    }
+
 }

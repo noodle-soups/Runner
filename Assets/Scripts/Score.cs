@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class Score : MonoBehaviour
 {
-    [SerializeField] private int _playerScore = 0;
+    private GameManager _gameManager;
+
+    private void Start()
+    {
+        _gameManager = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameManager>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            _playerScore++;
-            Debug.Log("Score!! Player score is now: " + _playerScore.ToString());
+            _gameManager.AddScore(1);
         }
     }
 }
