@@ -15,7 +15,7 @@ public class Score : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            _gameManager.AddScore(1);
+            _gameManager.AddScore(100);
         }
     }
 }
