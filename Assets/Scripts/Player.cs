@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 {
 
     [Header("References")]
+    public GameManager _gameManager;
     [SerializeField] private Rigidbody2D _rb;
 
     [Header("Movement")]
@@ -23,18 +24,23 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask whatIsGround;
     protected private bool isGrounded;
 
-    //[Header("Direction")]
-    //private bool isFacingRight = true;
+    [Header("Alive")]
+    public bool isAlive = true;
 
 
     void Start()
     {
+        _gameManager = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameManager>();
         _rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
         GroundCheck();
+        Debug.Log(isAlive);
+
+        if (_gameManager._playerHealth < 0)
+            isAlive = false;
     }
 
     private void FixedUpdate()

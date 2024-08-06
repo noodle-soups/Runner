@@ -6,13 +6,18 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
 
-    [Header("Player Score")]
+    [Header("Score")]
     [SerializeField] private int _playerScore = 0;
     [SerializeField] private Text _scoreText;
 
     [Header("Time")]
     [SerializeField] private float _timeInSeconds;
     [SerializeField] private Text _timeText;
+
+    [Header("Health")]
+    //[SerializeField] private int _playerHealth = 3;
+    public int _playerHealth = 3;
+    [SerializeField] private Text _healthText;
 
     private void Update()
     {
@@ -23,6 +28,12 @@ public class GameManager : MonoBehaviour
     {
         _playerScore += scoreToAdd;
         _scoreText.text = "Score: " + _playerScore.ToString();
+    }
+    public void DamageHealth(int damageHealthBy)
+    {
+        _playerHealth += -damageHealthBy;
+        _healthText.text = "Health: " + _playerHealth.ToString();
+        /* Should player's isAlive logic go in here?? */
     }
 
     private void DisplayTime()
