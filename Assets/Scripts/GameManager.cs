@@ -72,4 +72,9 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Level");
     }
 
+    public void LoadTitleScreen()
+    {
+        SceneManager.LoadScene("Title Screen");
+    }
+
 }

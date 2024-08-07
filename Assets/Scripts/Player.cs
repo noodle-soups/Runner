@@ -37,7 +37,6 @@ public class Player : MonoBehaviour
     void Update()
     {
         GroundCheck();
-        Debug.Log("_isAlive: " + _isAlive);
     }
 
     private void FixedUpdate()
