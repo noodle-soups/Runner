@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+
+    [Header("References")]
+    public Player _player;
 
     [Header("Score")]
     [SerializeField] private int _playerScore = 0;
@@ -15,9 +19,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Text _timeText;
 
     [Header("Health")]
-    //[SerializeField] private int _playerHealth = 3;
     public int _playerHealth = 3;
     [SerializeField] private Text _healthText;
+
+    private void Start()
+    {
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
 
     private void Update()
     {
@@ -33,7 +41,8 @@ public class GameManager : MonoBehaviour
     {
         _playerHealth += -damageHealthBy;
         _healthText.text = "Health: " + _playerHealth.ToString();
-        /* Should player's isAlive logic go in here?? */
+        if (_playerHealth < 0)
+            _player._isAlive = false;
     }
 
     private void DisplayTime()

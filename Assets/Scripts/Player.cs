@@ -22,10 +22,10 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckDistance;
     [SerializeField] private LayerMask whatIsGround;
-    protected private bool isGrounded;
+    protected private bool _isGrounded;
 
     [Header("Alive")]
-    public bool isAlive = true;
+    public bool _isAlive = true;
 
 
     void Start()
@@ -37,10 +37,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         GroundCheck();
-        Debug.Log(isAlive);
-
-        if (_gameManager._playerHealth < 0)
-            isAlive = false;
+        Debug.Log("_isAlive: " + _isAlive);
     }
 
     private void FixedUpdate()
@@ -50,19 +47,20 @@ public class Player : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        _xInput = context.ReadValue<Vector2>().x;
+        if (_isAlive)
+            _xInput = context.ReadValue<Vector2>().x;
     }
 
     public void Jump(InputAction.CallbackContext context)
     {
-        if (context.performed && isGrounded)
+        if (context.performed && _isAlive && _isGrounded)
             _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
     }
 
     // ground check
     private void GroundCheck()
     {
-        isGrounded = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
+        _isGrounded = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
     }
 
     // gizmos
