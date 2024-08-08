@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WallHit : MonoBehaviour
 {
+    private AudioSource _damageSFX;
     private GameManager _gameManager;
     private Player _player;
     [SerializeField] private float _wallSpeed = 5f;
@@ -13,6 +14,7 @@ public class WallHit : MonoBehaviour
     {
         _gameManager = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameManager>();
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        _damageSFX = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -31,7 +33,10 @@ public class WallHit : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
+        {
             _gameManager.DamageHealth(1);
+            _damageSFX.Play();
+        }
     }
 
 

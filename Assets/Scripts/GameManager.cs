@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     [Header("References")]
     public Player _player;
     [SerializeField] private GameObject _gameOverUI;
+    private AudioSource[] _audioSources;
+    private AudioSource _gameOverSFX;
 
     [Header("Score")]
     [SerializeField] private int _playerScore = 0;
@@ -27,6 +29,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        _audioSources = GetComponents<AudioSource>();
+        _gameOverSFX = _audioSources[1];
     }
 
     private void Update()
@@ -54,6 +58,7 @@ public class GameManager : MonoBehaviour
     private void GameOver()
     {
         _gameOverUI.SetActive(true);
+        _gameOverSFX.Play();
     }
 
     private void DisplayTime()
