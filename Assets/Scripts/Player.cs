@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
 
     [Header("Jump")]
     [SerializeField] private float _jumpForce;
+    private AudioSource _jumpSFX;
 
     [Header("Ground Check")]
     [SerializeField] private Transform groundCheck;
@@ -31,6 +32,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         _gameManager = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<GameManager>();
+        _jumpSFX = GetComponent<AudioSource>();
         _rb = GetComponent<Rigidbody2D>();
     }
 
@@ -53,7 +55,10 @@ public class Player : MonoBehaviour
     public void Jump(InputAction.CallbackContext context)
     {
         if (context.performed && _isAlive && _isGrounded)
+        {
             _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
+            _jumpSFX.Play();
+        }
     }
 
     // ground check
