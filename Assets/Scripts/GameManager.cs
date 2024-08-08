@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
         _playerScore += scoreToAdd;
         _scoreText.text = "Score: " + _playerScore.ToString();
     }
+
     public void DamageHealth(int damageHealthBy)
     {
         _playerHealth += -damageHealthBy;
