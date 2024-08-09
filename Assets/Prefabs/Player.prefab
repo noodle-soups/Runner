@@ -286,13 +286,14 @@ MonoBehaviour:
   _gameManager: {fileID: 0}
   _rb: {fileID: 0}
   _moveSpeed: 10
-  _jumpForce: 20
+  _jumpForce: 15
   groundCheck: {fileID: 6492728076458176458}
   groundCheckDistance: 1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
   _isAlive: 1
+  _isFacingRight: 1
 --- !u!82 &4473823213183104340
 AudioSource:
   m_ObjectHideFlags: 0
