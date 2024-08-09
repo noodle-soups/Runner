@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
     {
         _playerHealth += -damageHealthBy;
         _healthText.text = "Health: " + _playerHealth.ToString();
-        if (_playerHealth < 0)
+        if (_playerHealth < 1)
         {
             _player._isAlive = false;
             GameOver();

@@ -25,8 +25,9 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask whatIsGround;
     protected private bool _isGrounded;
 
-    [Header("Alive")]
+    [Header("States")]
     public bool _isAlive = true;
+    public bool _isFacingRight = true;
 
 
     void Start()
@@ -39,6 +40,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         GroundCheck();
+        FlipCheck();
     }
 
     private void FixedUpdate()
@@ -59,12 +61,35 @@ public class Player : MonoBehaviour
             _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
             _jumpSFX.Play();
         }
+        
+        if (context.canceled && _rb.velocity.y > 0f && _isAlive)
+        {
+            _rb.velocity = new Vector2(_rb.velocity.x, _rb.velocity.y * 0.5f);
+        }
     }
 
     // ground check
     private void GroundCheck()
     {
         _isGrounded = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
+    }
+
+    // flip
+    private void Flip()
+    {
+        _isFacingRight = !_isFacingRight;
+        Vector3 _localScale = transform.localScale;
+        _localScale.x *= -1f;
+        transform.localScale = _localScale;
+    }
+
+    // check if flip is needed
+    private void FlipCheck()
+    {
+        if (!_isFacingRight && _xInput > 0f)
+            Flip();
+        else if (_isFacingRight && _xInput < 0f)
+            Flip();
     }
 
     // gizmos
